@@ -12,7 +12,7 @@ int main()
     sf::Clock clock;
 
     mainMenu myMainMenu(menu.getSize().x, menu.getSize().y);
-    ball myBall(VM.width/2, VM.height, 10, 10);
+    ball myBall(VM.width/2, 1, 10, 10);
     paddle myPaddle(VM.width/2, 700, 100,7);
 
     //Get the font file
@@ -28,7 +28,7 @@ int main()
     fontLives.setOutlineThickness(3);
     fontLives.setFillColor(sf::Color(48, 98, 48));
 
-    int lives = 3;
+    int lives = 4;
     std::stringstream ssLives;
     ssLives << "Lives: " << lives;
     fontLives.setString(ssLives.str());
@@ -46,6 +46,20 @@ int main()
     std::stringstream ssPoints;
     ssPoints << "Points: " << points;
     fontPoints.setString(ssPoints.str());
+
+    //# Seperate highScore class but works for now*
+    sf::Text fontHighScore;
+    fontHighScore.setFont(font);
+    fontHighScore.setPosition(VM.width/2, VM.height/2);
+    fontHighScore.setCharacterSize(30);
+    fontHighScore.setFillColor(sf::Color(139, 172, 15)); //Dark green Gameboy color
+    fontHighScore.setOutlineThickness(3);
+    fontHighScore.setFillColor(sf::Color(48, 98, 48));
+
+    int highScorePoints = 0;
+    std::stringstream ssHighScore;
+    ssHighScore << "HighScore: " << highScorePoints;
+    fontHighScore.setString(ssHighScore.str());
 
 
     sf::Time deltaTime;
@@ -86,13 +100,14 @@ int main()
                     if (x == 0)
                     {
                         //Reset the game on play
-                        lives = 3;
+                        lives = 4;
                         points = 0;
 
                         //Update lives and score in the same loop
                         ssLives.str("");
                         ssLives << "Lives: " << lives;
                         fontLives.setString(ssLives.str());
+
                         ssPoints.str("");
                         ssPoints << "Points: " << points;
                         fontPoints.setString(ssPoints.str());
@@ -133,9 +148,13 @@ int main()
                             }
 
 
-                            //Makes the window cloable by pressing the Escape key;
+                            //Makes the window closable by pressing the Escape key;
                             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || lives < 1)
                             {
+                                if (points > highScorePoints) {
+                                    highScorePoints = points;
+                                }
+
                                 play.close();
                             }
 
@@ -200,6 +219,10 @@ int main()
 
                     if (x == 1)
                     {
+                        ssHighScore.str("");
+                        ssHighScore << "HighScore: " << highScorePoints;
+                        fontHighScore.setString(ssHighScore.str());
+
                         while (highScore.isOpen())
                         {
 
@@ -221,6 +244,9 @@ int main()
                             }
                             play.close();
                             highScore.clear(sf::Color(139, 172, 15));
+
+                            highScore.draw(fontHighScore);
+
                             highScore.display();
                         }
                     }
