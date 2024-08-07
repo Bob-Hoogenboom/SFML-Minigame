@@ -5,8 +5,10 @@
 class paddle
 {
 private:
-	vec2 _sizeVec2;//# Change later to own Vector2 math utility class
+	vec2 _sizeVec2;
 	vec2 _positionVec2;
+	vec2 _velocity;
+
 	sf::RectangleShape _paddleShape; 
 
 	float _speed = 1000.0f;
@@ -16,6 +18,7 @@ private:
 
 public:
 	paddle(float startX, float starty, float sizeX, float sizeY);
+	vec2 _acceleration;
 
 	sf::RectangleShape getShape();
 	sf::FloatRect getPosition();

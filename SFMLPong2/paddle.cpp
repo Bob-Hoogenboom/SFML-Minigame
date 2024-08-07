@@ -39,22 +39,33 @@ void paddle::moveRight()
 void paddle::stopLeft() 
 {
 	_moveLeft = false;
+	if (_moveRight == false)
+	{
+		_velocity = vec2(0, 0);
+	}
 }
 
 void paddle::stopRight() 
 {
 	_moveRight = false;
+	if (_moveLeft == false)
+	{
+		_velocity = vec2(0, 0);
+	}
 }
 
 void paddle::update(sf::Time deltaTime) 
 {
 	if (_moveLeft) {
-		_positionVec2.setX( _positionVec2.getX() -  _speed * deltaTime.asSeconds());
+		
+		_velocity += _acceleration * deltaTime.asSeconds();
+		_positionVec2.setX( _positionVec2.getX() -  _velocity.getX() * deltaTime.asSeconds());
 	}
 
 	if (_moveRight)
 	{
-		_positionVec2.setX( _positionVec2.getX() + _speed * deltaTime.asSeconds());
+		_velocity += _acceleration * deltaTime.asSeconds();
+		_positionVec2.setX( _positionVec2.getX() + _velocity.getX() * deltaTime.asSeconds());
 	}
 
 	_paddleShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));

@@ -20,6 +20,11 @@ public:
 	//Methods where you can change the Const value
 	void setX( float x);
 	void setY( float y);
+
+	// Operator overloading for vector arithmetic
+	vec2 operator+(const vec2& other) const;
+	vec2& operator+=(const vec2& other);
+	vec2 operator*(float scalar) const;
 };
 
 #endif

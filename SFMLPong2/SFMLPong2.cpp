@@ -93,7 +93,7 @@ int main()
 
                 if (event.key.code == sf::Keyboard::Return) 
                 {
-                    sf::RenderWindow play(VM, "She Ping on my Pong till I C++");
+                    sf::RenderWindow play(VM, "GameWindow");
                     sf::RenderWindow highScore(VM, "HighScore");
                     
                     int x = myMainMenu.mainMenuPressed();
@@ -117,7 +117,7 @@ int main()
                             deltaTime = clock.restart();
                             bounceTimer -= deltaTime.asSeconds();
 
-                            if (myBall.getPosition().intersects(myPaddle.getPosition()))
+                            if (myBall.getPosition().intersects(myPaddle.getPosition()))//#intersect must be in a math library* 
                             {
                                 if (bounceTimer < 0)
                                 {
@@ -204,6 +204,7 @@ int main()
                             highScore.close();
 
                             //Update gameObjects
+                            myPaddle._acceleration = vec2(120.0f, 0.0f);
                             myBall.update(deltaTime);
                             myPaddle.update(deltaTime);
 
