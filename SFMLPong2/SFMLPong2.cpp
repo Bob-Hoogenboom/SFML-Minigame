@@ -204,7 +204,7 @@ int main()
                             highScore.close();
 
                             //Update gameObjects
-                            myPaddle._acceleration = vec2(120.0f, 0.0f);
+                            myPaddle._acceleration = vec2(5.0f, 0.0f);
                             myBall.update(deltaTime);
                             myPaddle.update(deltaTime);
 

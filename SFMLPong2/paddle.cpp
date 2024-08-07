@@ -59,13 +59,13 @@ void paddle::update(sf::Time deltaTime)
 	if (_moveLeft) {
 		
 		_velocity += _acceleration * deltaTime.asSeconds();
-		_positionVec2.setX( _positionVec2.getX() -  _velocity.getX() * deltaTime.asSeconds());
+		_positionVec2.setX( _positionVec2.getX() -  _velocity.getX());
 	}
 
 	if (_moveRight)
 	{
 		_velocity += _acceleration * deltaTime.asSeconds();
-		_positionVec2.setX( _positionVec2.getX() + _velocity.getX() * deltaTime.asSeconds());
+		_positionVec2.setX( _positionVec2.getX() + _velocity.getX());
 	}
 
 	_paddleShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
