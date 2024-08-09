@@ -1,3 +1,4 @@
+#include <cmath> //sqrt*
 #include "vec2.h"
 
 vec2::vec2() : _x(0), _y() 
@@ -25,6 +26,10 @@ float vec2::getY()
 	return _y;
 }
 
+float vec2::magnitude() const {
+	return std::sqrt(_x * _x + _y * _y);
+}
+
 //Set a new X and Y on the Vector2 anytime
 void vec2::setX( float x)
 {
@@ -48,4 +53,12 @@ vec2& vec2::operator+=(const vec2& other) {
 
 vec2 vec2::operator*(float scalar) const {
 	return vec2(_x * scalar, _y * scalar);
+}
+
+bool vec2::operator>(const vec2& other) const {
+	return this->magnitude() > other.magnitude();
+}
+
+bool vec2::operator<(const vec2& other) const {
+	return this->magnitude() < other.magnitude();
 }

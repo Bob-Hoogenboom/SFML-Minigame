@@ -12,7 +12,7 @@ ball::ball(float startX, float startY, float sizeX, float sizeY)
 
 	_ballShape.setSize(sf::Vector2f(_sizeVec2.getX(), _sizeVec2.getY()));
 	_ballShape.setFillColor(sf::Color(15, 56, 15)); //Darkest gameboy color;
-	_ballShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
+	_ballShape.setPosition(sf::Vector2f(1.0f, 400.0f));
 }
 
 //A Member Function to return the current position of the ball
@@ -65,8 +65,15 @@ void ball::hitBall()
 //This Member Function calculates the new Ball position and sets it accordingly
 void ball::update(sf::Time deltaTime) 
 {
-	_positionVec2.setX( _positionVec2.getX() + _directionX * _speed * deltaTime.asSeconds());
-	_positionVec2.setY(_positionVec2.getY() + _directionY * _speed * deltaTime.asSeconds());
+	if (_velocity < vec2(150.0f, 150.0f))
+	{
+		_velocity += acceleration * deltaTime.asSeconds();
+	}
+	else {
+		_velocity = vec2(150.0f, 150.0f);
+	}
+	_positionVec2.setX( _positionVec2.getX() + _directionX * _velocity.getX() * deltaTime.asSeconds());
+	_positionVec2.setY(_positionVec2.getY() + _directionY * _velocity.getY() * deltaTime.asSeconds());
 
 	_ballShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
 }

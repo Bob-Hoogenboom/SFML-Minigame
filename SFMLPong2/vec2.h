@@ -17,6 +17,8 @@ public:
 	float getX() ;
 	float getY() ;
 
+	float magnitude() const;
+
 	//Methods where you can change the Const value
 	void setX( float x);
 	void setY( float y);
@@ -25,6 +27,10 @@ public:
 	vec2 operator+(const vec2& other) const;
 	vec2& operator+=(const vec2& other);
 	vec2 operator*(float scalar) const;
+
+	bool operator>(const vec2& other) const;
+	bool operator<(const vec2& other) const;
+
 };
 
 #endif

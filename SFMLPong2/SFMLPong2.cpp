@@ -28,7 +28,7 @@ int main()
     fontLives.setOutlineThickness(3);
     fontLives.setFillColor(sf::Color(48, 98, 48));
 
-    int lives = 4;
+    int lives = 3;
     std::stringstream ssLives;
     ssLives << "Lives: " << lives;
     fontLives.setString(ssLives.str());
@@ -204,8 +204,9 @@ int main()
                             highScore.close();
 
                             //Update gameObjects
-                            myPaddle._acceleration = vec2(5.0f, 0.0f);
+                            myBall.acceleration = vec2(30.0f, 30.0f);
                             myBall.update(deltaTime);
+                            myPaddle._acceleration = vec2(5.0f, 0.0f);
                             myPaddle.update(deltaTime);
 
                             //Draw all gameObjects

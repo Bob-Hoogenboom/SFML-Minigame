@@ -18,7 +18,7 @@ private:
 
 public:
 	paddle(float startX, float starty, float sizeX, float sizeY);
-	vec2 _acceleration;
+	vec2 _acceleration; //public so it can be editted in main to define speed
 
 	sf::RectangleShape getShape();
 	sf::FloatRect getPosition();
