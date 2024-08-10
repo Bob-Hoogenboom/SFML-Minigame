@@ -60,7 +60,7 @@ int main()
     //# Seperate highScore class but works for now*
     sf::Text fontHighScore;
     fontHighScore.setFont(font);
-    fontHighScore.setPosition(VM.width/2, VM.height/2);
+    fontHighScore.setPosition(VM.width/3, VM.height/2);
     fontHighScore.setCharacterSize(30);
     fontHighScore.setFillColor(sf::Color(139, 172, 15)); //Dark green Gameboy color
     fontHighScore.setOutlineThickness(3);
