@@ -5,8 +5,6 @@
 class paddle
 {
 private:
-	vec2 _sizeVec2;
-	vec2 _positionVec2;
 	vec2 _velocity;
 
 	sf::RectangleShape _paddleShape; 
@@ -18,10 +16,14 @@ private:
 
 public:
 	paddle(float startX, float starty, float sizeX, float sizeY);
-	vec2 _acceleration; //public so it can be editted in main to define speed
+
+	vec2 sizeVec2;
+	vec2 positionVec2;
 
 	sf::RectangleShape getShape();
 	sf::FloatRect getPosition();
+	
+	vec2 _acceleration; //public so it can be editted in main to define speed
 
 	void moveLeft();
 	void moveRight();

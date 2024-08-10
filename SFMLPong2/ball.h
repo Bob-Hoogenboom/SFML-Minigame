@@ -8,9 +8,8 @@
 class ball
 {
 private:
-	vec2 _sizeVec2;
-	vec2 _positionVec2;
-	vec2 _velocity;
+	float _speedCap = 500.0f;
+
 	sf::RectangleShape _ballShape;
 
 	float _directionX = 1.0f;
@@ -18,11 +17,16 @@ private:
 
 
 public:
-	ball(float startX, float startY, float sizeX, float sizeY);//Constructor
+	ball(float startX, float startY, float sizeX, float sizeY); //Constructor
+	
+	vec2 sizeVec2;
+	vec2 positionVec2;
+
 	sf::FloatRect getPosition();
 	sf::RectangleShape getShape();
 
 	vec2 acceleration; //public so it can be editted in main to define speed
+	vec2 velocity;
 
 	float getXVelocity();
 

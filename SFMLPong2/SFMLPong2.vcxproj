@@ -149,6 +149,7 @@
     <ClCompile Include="mainMenu.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Download\SFML\SFML-2.6.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="Mathf.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="SFMLPong2.cpp" />
     <ClCompile Include="vec2.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="ball.h" />
     <ClInclude Include="mainMenu.h" />
+    <ClInclude Include="Mathf.h" />
     <ClInclude Include="paddle.h" />
     <ClInclude Include="vec2.h" />
   </ItemGroup>

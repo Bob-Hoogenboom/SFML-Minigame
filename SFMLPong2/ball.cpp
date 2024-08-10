@@ -4,13 +4,13 @@
 //Sets the given start position to its current position and sets the size
 ball::ball(float startX, float startY, float sizeX, float sizeY) 
 {
-	_sizeVec2.setX(sizeX);
-	_sizeVec2.setY(sizeY);
+	sizeVec2.setX(sizeX);
+	sizeVec2.setY(sizeY);
 
-	_positionVec2.setX(startX);
-	_positionVec2.setY(startY);
+	positionVec2.setX(startX);
+	positionVec2.setY(startY);
 
-	_ballShape.setSize(sf::Vector2f(_sizeVec2.getX(), _sizeVec2.getY()));
+	_ballShape.setSize(sf::Vector2f(sizeVec2.getX(), sizeVec2.getY()));
 	_ballShape.setFillColor(sf::Color(15, 56, 15)); //Darkest gameboy color;
 	_ballShape.setPosition(sf::Vector2f(1.0f, 400.0f));
 }
@@ -29,7 +29,7 @@ sf::RectangleShape ball::getShape()
 }
 
 //Mat not be used but is usefull Member Function for debugging the ball later on
-float ball:: getXVelocity()
+float ball:: getXVelocity()  
 {
 	return _directionX;
 }
@@ -52,8 +52,8 @@ void ball::hitBottomVoid()
 	std::random_device random;
 	std::uniform_int_distribution<int> dist(10, 1270);
 	
-	_positionVec2.setX(dist(random));
-	_positionVec2.setY(1);	
+	positionVec2.setX(dist(random));
+	positionVec2.setY(1);	
 }
 
 //Changes the direction of the ball upwards when the ball hits a paddle
@@ -65,17 +65,17 @@ void ball::hitBall()
 //This Member Function calculates the new Ball position and sets it accordingly
 void ball::update(sf::Time deltaTime) 
 {
-	if (_velocity < vec2(150.0f, 150.0f))
+	if (velocity < vec2(_speedCap, _speedCap))
 	{
-		_velocity += acceleration * deltaTime.asSeconds();
+		velocity += acceleration * deltaTime.asSeconds();
 	}
 	else {
-		_velocity = vec2(150.0f, 150.0f);
+		velocity = vec2(_speedCap, _speedCap);
 	}
-	_positionVec2.setX( _positionVec2.getX() + _directionX * _velocity.getX() * deltaTime.asSeconds());
-	_positionVec2.setY(_positionVec2.getY() + _directionY * _velocity.getY() * deltaTime.asSeconds());
+	positionVec2.setX( positionVec2.getX() + _directionX * velocity.getX() * deltaTime.asSeconds());
+	positionVec2.setY(positionVec2.getY() + _directionY * velocity.getY() * deltaTime.asSeconds());
 
-	_ballShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
+	_ballShape.setPosition(sf::Vector2f(positionVec2.getX(), positionVec2.getY()));
 }
 
 

@@ -16,12 +16,12 @@ vec2::~vec2()
 }
 
 //Get the current X and Y of the vector2 anytime
-float vec2::getX()  
+float vec2::getX() const  
 {
 	return _x;
 }
 
-float vec2::getY()  
+float vec2::getY() const 
 {
 	return _y;
 }

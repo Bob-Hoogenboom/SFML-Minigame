@@ -1,19 +1,31 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <chrono>
+#include <thread>
+
 #include "mainMenu.h"
 #include "ball.h"
 #include "paddle.h"
+#include "Mathf.h"
+
+int lives = 3;
+int points = 0;
+int highScorePoints = 0;
+
+sf::VideoMode VM(1280, 720);
+ball myBall(VM.width/2, 1, 10, 10);
+paddle myPaddle(VM.width/2, 700, 100,7);
+
+// function decleration
+void RestartGame();
 
 int main()
 {
-    sf::VideoMode VM(1280, 720);
     sf::RenderWindow menu(VM, "MainMenu", sf::Style::Default);
     sf::Clock clock;
 
     mainMenu myMainMenu(menu.getSize().x, menu.getSize().y);
-    ball myBall(VM.width/2, 1, 10, 10);
-    paddle myPaddle(VM.width/2, 700, 100,7);
 
     //Get the font file
     sf::Font font;
@@ -28,7 +40,6 @@ int main()
     fontLives.setOutlineThickness(3);
     fontLives.setFillColor(sf::Color(48, 98, 48));
 
-    int lives = 3;
     std::stringstream ssLives;
     ssLives << "Lives: " << lives;
     fontLives.setString(ssLives.str());
@@ -42,7 +53,6 @@ int main()
     fontPoints.setOutlineThickness(3);
     fontPoints.setFillColor(sf::Color(48, 98, 48));
 
-    int points = 0;
     std::stringstream ssPoints;
     ssPoints << "Points: " << points;
     fontPoints.setString(ssPoints.str());
@@ -56,7 +66,6 @@ int main()
     fontHighScore.setOutlineThickness(3);
     fontHighScore.setFillColor(sf::Color(48, 98, 48));
 
-    int highScorePoints = 0;
     std::stringstream ssHighScore;
     ssHighScore << "HighScore: " << highScorePoints;
     fontHighScore.setString(ssHighScore.str());
@@ -93,15 +102,13 @@ int main()
 
                 if (event.key.code == sf::Keyboard::Return) 
                 {
-                    sf::RenderWindow play(VM, "GameWindow");
+                    sf::RenderWindow play(VM, "She Ping on my Pong till i C++");
                     sf::RenderWindow highScore(VM, "HighScore");
                     
                     int x = myMainMenu.mainMenuPressed();
                     if (x == 0)
                     {
-                        //Reset the game on play
-                        lives = 4;
-                        points = 0;
+                        RestartGame();
 
                         //Update lives and score in the same loop
                         ssLives.str("");
@@ -117,7 +124,7 @@ int main()
                             deltaTime = clock.restart();
                             bounceTimer -= deltaTime.asSeconds();
 
-                            if (myBall.getPosition().intersects(myPaddle.getPosition()))//#intersect must be in a math library* 
+                            if (Mathf::intersect(myBall.positionVec2, myBall.sizeVec2, myPaddle.positionVec2, myPaddle.sizeVec2) )//#intersect must be in a math library* 
                             {
                                 if (bounceTimer < 0)
                                 {
@@ -154,6 +161,9 @@ int main()
                                 if (points > highScorePoints) {
                                     highScorePoints = points;
                                 }
+
+                                //let the player know the game overd then end the game
+                                //std::this_thread::sleep_for(std::chrono::seconds(3));
 
                                 play.close();
                             }
@@ -204,7 +214,7 @@ int main()
                             highScore.close();
 
                             //Update gameObjects
-                            myBall.acceleration = vec2(30.0f, 30.0f);
+                            myBall.acceleration = vec2(25.0f, 25.0f);
                             myBall.update(deltaTime);
                             myPaddle._acceleration = vec2(5.0f, 0.0f);
                             myPaddle.update(deltaTime);
@@ -267,4 +277,12 @@ int main()
         menu.display();
     }
     return 0;
+}
+
+void RestartGame() {
+    //Reset the game on play
+    lives = 3;
+    points = 0;
+    
+    myBall.velocity = vec2(0, 0);
 }

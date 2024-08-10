@@ -14,8 +14,8 @@ public:
 	~vec2();
 
 	//Const so the data can not be changed as its constant
-	float getX() ;
-	float getY() ;
+	float getX() const;
+	float getY() const;
 
 	float magnitude() const;
 

@@ -2,18 +2,18 @@
 
 paddle::paddle(float startX, float startY, float sizeX, float sizeY)
 {
-	_positionVec2.setX(startX);
-	_positionVec2.setY(startY);
+	positionVec2.setX(startX);
+	positionVec2.setY(startY);
 
-	_sizeVec2.setX(sizeX);
-	_sizeVec2.setY(sizeY);
+	sizeVec2.setX(sizeX);
+	sizeVec2.setY(sizeY);
 
-	_paddleShape.setSize(sf::Vector2f(_sizeVec2.getX(), _sizeVec2.getY()));
+	_paddleShape.setSize(sf::Vector2f(sizeVec2.getX(), sizeVec2.getY()));
 	_paddleShape.setFillColor(sf::Color(15, 56, 15)); //Darkest gameboy color
 	_paddleShape.setOutlineColor(sf::Color(15, 56, 15));
 	_paddleShape.setOutlineThickness(3);
 
-	_paddleShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
+	_paddleShape.setPosition(sf::Vector2f(positionVec2.getX(), positionVec2.getY()));
 }
 
 sf::FloatRect paddle::getPosition() 
@@ -59,14 +59,14 @@ void paddle::update(sf::Time deltaTime)
 	if (_moveLeft) {
 		
 		_velocity += _acceleration * deltaTime.asSeconds();
-		_positionVec2.setX( _positionVec2.getX() -  _velocity.getX());
+		positionVec2.setX( positionVec2.getX() -  _velocity.getX());
 	}
 
 	if (_moveRight)
 	{
 		_velocity += _acceleration * deltaTime.asSeconds();
-		_positionVec2.setX( _positionVec2.getX() + _velocity.getX());
+		positionVec2.setX( positionVec2.getX() + _velocity.getX());
 	}
 
-	_paddleShape.setPosition(sf::Vector2f(_positionVec2.getX(), _positionVec2.getY()));
+	_paddleShape.setPosition(sf::Vector2f(positionVec2.getX(), positionVec2.getY()));
 }
