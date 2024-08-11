@@ -1,6 +1,3 @@
-#ifndef VECTOR2
-#define VECTOR2
-
 #pragma once
 class vec2
 {
@@ -23,16 +20,15 @@ public:
 	void setX( float x);
 	void setY( float y);
 
-	// Operator overloading for vector arithmetic
+	//Operators for vector arithmetic
 	vec2 operator+(const vec2& other) const;
 	vec2& operator+=(const vec2& other);
 	vec2 operator-(const vec2& other) const;
 	vec2& operator-=(const vec2& other);
 	vec2 operator*(float scalar) const;
 
+	//Operator checks
 	bool operator>(const vec2& other) const;
 	bool operator<(const vec2& other) const;
-
 };
 
-#endif
