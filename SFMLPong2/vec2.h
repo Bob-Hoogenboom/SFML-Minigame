@@ -26,6 +26,8 @@ public:
 	// Operator overloading for vector arithmetic
 	vec2 operator+(const vec2& other) const;
 	vec2& operator+=(const vec2& other);
+	vec2 operator-(const vec2& other) const;
+	vec2& operator-=(const vec2& other);
 	vec2 operator*(float scalar) const;
 
 	bool operator>(const vec2& other) const;
